@@ -7,14 +7,28 @@ local M = {}
 
 M.username = config.username
 
+local function get_git_remote_origin_url()
+    -- Get the remote origin URL from the Git config file
+    local remote_origin_url = vim.fn.systemlist('git config --get remote.origin.url')[1]
+
+    local username = remote_origin_url:match('github%.com/([^/]+)/')
+    local repo_name = remote_origin_url:match('github%.com/[^/]+/(.-)%.git$')
+
+    return username, repo_name
+end
+
+local username, repo_name = get_git_remote_origin_url()
+
 local headers = {
   ["Accept"] = "application/json",
   ["Authorization"] = "Bearer <TOKEN_GOES_HERE>",
   ["X-GitHub-Api-Version"] = "2022-11-28"
 }
 
-  local response = curl.get({ url = 'https://api.github.com/repos/<username>/<repo>/pulls', headers = headers })
+local url = 'https://api.github.com/repos/' .. username .. '/' .. repo_name .. '/pulls'
+
 M.get_prs = function()
+  local response = curl.get({ url = url, headers = headers })
 
   return decode(response.body)
 end
