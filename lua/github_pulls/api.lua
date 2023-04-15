@@ -1,9 +1,11 @@
 local curl = require("plenary.curl")
 local decode = vim.fn.json_decode
+local setup = require("github_pulls.init")
 
+local config = setup.config
 local M = {}
 
-M.username = "changangus"
+M.username = config.username
 
 local headers = {
   ["Accept"] = "application/json",
