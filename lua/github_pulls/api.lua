@@ -35,22 +35,6 @@ M.get_prs = function()
   return decode(response.body)
 end
 
-M.translate_data = function(pulls)
-  local data = {}
-
-  for _, pull in ipairs(pulls) do
-      table.insert(data, {
-        title = pull.title,
-        number = pull.number,
-        html_url = pull.html_url,
-        reviewers = pull.requested_reviewers,
-        branch_name = pull.head.ref,
-      })
-  end
-
-  return data
-end
-
 M.get_prs_by_user = function()
   setup_config()
   local pulls = M.get_prs()
