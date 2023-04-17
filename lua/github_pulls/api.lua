@@ -21,7 +21,7 @@ local username, repo_name = get_git_remote_origin_url()
 
 local headers = {
   ["Accept"] = "application/json",
-  ["Authorization"] = "Bearer <TOKEN_GOES_HERE>",
+  ["Authorization"] = "Bearer " .. os.getenv("GH_TOKEN"),
   ["X-GitHub-Api-Version"] = "2022-11-28"
 }
 
