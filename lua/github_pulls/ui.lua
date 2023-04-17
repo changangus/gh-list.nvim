@@ -18,7 +18,7 @@ local function create_pr_window()
   local width = M.config.width
   local height = M.config.height
   local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-  local bufnr = vim.api.nvim_create_buf(true, true)
+  local bufnr = vim.api.nvim_create_buf(false, true)
 
   local Prs_win_id, win = popup.create(bufnr, {
     title = "Pull Requests",
@@ -59,6 +59,7 @@ M.toggle_pr_menu = function()
   vim.api.nvim_buf_set_keymap(Prs_bufh, "n", "<esc>", ":q<CR>", { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(Prs_bufh, "n", "<cr>", ":lua require('github_pulls.ui').open_pull()<CR>",
     { noremap = true, silent = true })
+  vim.api.nvim_buf_set_option(Prs_bufh, "modifiable", false)
 end
 
 M.open_url = function(url)
@@ -94,7 +95,7 @@ local function create_review_window()
   local width = M.config.width
   local height = M.config.height
   local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-  local bufnr = vim.api.nvim_create_buf(true, true)
+  local bufnr = vim.api.nvim_create_buf(false, true)
 
   local Reviews_win_id, win = popup.create(bufnr, {
     title = "Reviews",
@@ -106,6 +107,7 @@ local function create_review_window()
     borderchars = borderchars,
   })
 
+  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
   vim.api.nvim_win_set_option(
     win.border.win_id,
     "winhl",
@@ -135,6 +137,7 @@ M.toggle_reviews_menu = function()
   vim.api.nvim_buf_set_keymap(Reviews_bufh, "n", "<esc>", ":q<CR>", { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(Reviews_bufh, "n", "<cr>", ":lua require('github_pulls.ui').open_review()<CR>",
     { noremap = true, silent = true })
+  vim.api.nvim_buf_set_option(Reviews_bufh, "modifiable", false)
 end
 
 return M
