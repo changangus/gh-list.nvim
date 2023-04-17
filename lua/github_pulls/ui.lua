@@ -1,10 +1,5 @@
 local api = require("github_pulls.api")
 local popup = require("plenary.popup")
-local setup = require("github_pulls.init")
-
-local config = setup.config
-
-local M = {}
 
 local getUrls = function(pulls)
   local urls = {}
@@ -20,8 +15,8 @@ M.reviews = api.get_reviews_by_user()
 M.review_urls = getUrls(M.reviews)
 
 local function create_pr_window()
-  local width = config.width
-  local height = config.height
+  local width = M.config.width
+  local height = M.config.height
   local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
   local bufnr = vim.api.nvim_create_buf(true, true)
 
@@ -96,8 +91,8 @@ M.open_review = function()
 end
 
 local function create_review_window()
-  local width = config.width
-  local height = config.height
+  local width = M.config.width
+  local height = M.config.height
   local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
   local bufnr = vim.api.nvim_create_buf(true, true)
 
