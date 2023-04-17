@@ -6,7 +6,6 @@ M.config = {
   width = 80,
   height = 20,
   username = '',
-  auth_token = ,
 }
 
 M.setup = function(options)
