@@ -36,6 +36,9 @@ local function create_pr_window()
     "Normal:PrsBorder"
   )
 
+  vim.api.nvim_command("hi PRsWindow guibg=bg")
+  vim.api.nvim_command("hi PrsBorder guibg=bg")
+
   return {
     bufnr = bufnr,
     win_id = Prs_win_id,
@@ -113,6 +116,8 @@ local function create_review_window()
     "winhl",
     "Normal:ReviewsBorder"
   )
+  vim.api.nvim_command("hi ReviewsWindow guibg=bg")
+  vim.api.nvim_command("hi ReviewsBorder guibg=bg")
 
   return {
     bufnr = bufnr,
