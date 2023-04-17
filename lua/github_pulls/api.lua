@@ -1,11 +1,13 @@
 local curl = require("plenary.curl")
 local decode = vim.fn.json_decode
-local setup = require("github_pulls.init")
 
-local config = setup.config
-local M = {}
-
-M.username = config.username
+local setup_config = function ()
+  if M.is_config_updated then
+    M.username = M.config.username
+    M.is_config_updated = false
+    return
+  end
+end
 
 local function get_git_remote_origin_url()
     -- Get the remote origin URL from the Git config file
@@ -50,6 +52,7 @@ M.translate_data = function(pulls)
 end
 
 M.get_prs_by_user = function()
+  setup_config()
   local pulls = M.get_prs()
   local data = {}
 
@@ -69,6 +72,7 @@ M.get_prs_by_user = function()
 end
 
 M.get_reviews_by_user = function()
+  setup_config()
   local pulls = M.get_prs()
   local data = {}
 
@@ -87,6 +91,5 @@ M.get_reviews_by_user = function()
 
   return data
 end
-
 
 return M
