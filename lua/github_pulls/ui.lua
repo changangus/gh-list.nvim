@@ -110,7 +110,6 @@ local function create_review_window()
     borderchars = borderchars,
   })
 
-  vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
   vim.api.nvim_win_set_option(
     win.border.win_id,
     "winhl",
