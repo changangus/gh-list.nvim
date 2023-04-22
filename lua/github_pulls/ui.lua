@@ -1,7 +1,7 @@
 local api = require("github_pulls.api")
 local popup = require("plenary.popup")
 
-local getUrls = function(pulls)
+local get_urls = function(pulls)
   local urls = {}
   for _, pull in ipairs(pulls) do
     table.insert(urls, pull.html_url)
@@ -9,10 +9,20 @@ local getUrls = function(pulls)
   return urls
 end
 
+local get_branch_name = function(pulls)
+  local branch_names = {}
+  for _, pull in ipairs(pulls) do
+    table.insert(branch_names, pull.branch_name)
+  end
+  return branch_names
+end
+
 M.prs = api.get_prs_by_user()
-M.pr_urls = getUrls(M.prs)
+M.branch_names = get_branch_name(M.prs)
+print(vim.inspect(M.branch_names))
+M.pr_urls = get_urls(M.prs)
 M.reviews = api.get_reviews_by_user()
-M.review_urls = getUrls(M.reviews)
+M.review_urls = get_urls(M.reviews)
 
 local function create_pr_window()
   local width = M.config.width
@@ -62,6 +72,8 @@ M.toggle_pr_menu = function()
   vim.api.nvim_buf_set_keymap(Prs_bufh, "n", "<esc>", ":q<CR>", { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(Prs_bufh, "n", "<cr>", ":lua require('github_pulls.ui').open_pull()<CR>",
     { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(Prs_bufh, "n", "gco", ":lua require('github_pulls.ui').checkout_branch()<CR>",
+    { noremap = true, silent = true })
   vim.api.nvim_buf_set_option(Prs_bufh, "modifiable", false)
 end
 
@@ -85,6 +97,18 @@ M.open_pull = function()
   local url = M.pr_urls[line - 1]
   M.open_url(url)
   vim.api.nvim_win_close(Prs_win_id, true)
+end
+
+M.checkout_branch = function()
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  local branch_name = M.branch_names[line - 1]
+  local status = os.execute("git checkout " .. branch_name)
+  print(status)
+  if status == 0 then
+    vim.api.nvim_win_close(Prs_win_id, true)
+  else
+    print("Failed to checkout branch")
+  end
 end
 
 M.open_review = function()
