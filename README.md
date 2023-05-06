@@ -31,7 +31,7 @@ Packer:
 
 1. Create a github personal access token, instructions can be found [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
 
-2. Globally export an environment variable named `GH-TOKEN` and assign your new token to the variable 
+2. Globally export an environment variable named `GH_TOKEN` and assign your new token to the variable 
 
 3. Make sure you have your username set in the config 
 
