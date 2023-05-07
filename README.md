@@ -4,10 +4,15 @@ This simple plugin is for users to more easily track authored PRs and reviews re
 
 ## Use cases
 
-- List all authored PRs for in a cwd github repo
+- List all authored PRs for in a cwd github repo 
 - List all reviews requested for in a cwd github repo 
 
 ![Screenshot 2023-05-06 at 7 57 20 PM](https://user-images.githubusercontent.com/63685366/236651036-2112acce-15ac-4a03-a49b-9b0550c64a8e.png)
+
+## Buffer keymaps: 
+
+Open specific PR in the browser by hitting `<CR>` 
+Checkout PR branch with `gco`
 
 ## Installation 
 
