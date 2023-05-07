@@ -1,6 +1,6 @@
 # github_pulls.nvim
 
-This simple plugin is for users to more easily track authored PRs and reviews requested for any github repo. 
+This simple Neovim plugin is for users to more easily track authored PRs and reviews requested for any github repo. 
 
 ## Use cases
 
@@ -11,8 +11,8 @@ This simple plugin is for users to more easily track authored PRs and reviews re
 
 ## Buffer keymaps: 
 
-Open specific PR in the browser by hitting `<CR>` 
-Checkout PR branch with `gco`
+- Open specific PR in the browser by hitting `<CR>` 
+- Checkout PR branch with `gco`
 
 ## Installation 
 
