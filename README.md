@@ -4,8 +4,8 @@ This simple Neovim plugin is for users to more easily track authored PRs and rev
 
 ## Use cases
 
-- List all authored PRs for in a cwd github repo 
-- List all reviews requested for in a cwd github repo 
+- List all authored PRs in a github repo 
+- List all reviews requested in a github repo 
 
 ![Screenshot 2023-05-06 at 7 57 20 PM](https://user-images.githubusercontent.com/63685366/236651036-2112acce-15ac-4a03-a49b-9b0550c64a8e.png)
 
