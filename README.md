@@ -1,4 +1,4 @@
-# github_pulls.nvim
+# gh-list.nvim
 
 This simple Neovim plugin is for users to more easily track authored PRs and reviews requested for any github repo. 
 
